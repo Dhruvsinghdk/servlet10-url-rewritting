@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="url">
+        Enter name : <input type="text" name="fname"><br>
+
+        <input type="submit" value="submit">
+    </form>
+
+</body>
+</html>
+
+
+<!-- home -->
+package abc;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/url")
+
+public class servlet10 extends HttpServlet {
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		res.setContentType("text/html");
+		PrintWriter p = res.getWriter();
+		
+		String name = req.getParameter("fname");
+		p.println("on home page = "+name);
+		
+		p.println("<form action = 'product'>");
+		p.println("<input type = 'hidden' name = 'fullname' value = '"+name+"'>");
+		p.println("<br>");
+		p.println("<input type = 'submit' value = 'submit' >");
+		p.println("</form>");
+	}
+
+}
+<!--product  -->
+package abc;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/product")
+
+public class product extends HttpServlet {
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		res.setContentType("text/html");
+		
+		PrintWriter p = res.getWriter();
+		
+		String name = req.getParameter("fullname");
+		p.println("Name = "+name);
+	}
+
+}
